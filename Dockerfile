@@ -30,7 +30,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # User setup
-RUN adduser $USER && \
+RUN adduser --uid $USER_ID $USER && \
   echo " $USER      ALL=(ALL:ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/$USER && \
   mkdir -p /workspaces /home/$USER/.claude /home/$USER/.opencode && \
   chown -R $USER:$USER /workspaces /home/$USER/.opencode /home/$USER/.claude
