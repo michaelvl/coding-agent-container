@@ -24,6 +24,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   npm \
   procps \
   sudo \
+  tmux \
   unzip \
   wget \
   xz-utils \
