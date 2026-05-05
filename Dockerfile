@@ -31,9 +31,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # User setup
-RUN adduser --uid $USER_ID $USER && \
-  echo " $USER      ALL=(ALL:ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/$USER && \
-  mkdir -p /workspaces /home/$USER/.claude /home/$USER/.opencode && \
+# RUN adduser --uid $USER_ID $USER && \
+RUN usermod -d /home/$USER -m -l $USER ubuntu && groupmod -n $USER ubuntu && \
+  echo " $USER      ALL=(ALL:ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/$USER
+RUN mkdir -p /workspaces /home/$USER/.claude /home/$USER/.opencode && \
   chown -R $USER:$USER /workspaces /home/$USER/.opencode /home/$USER/.claude
 
 USER $USER
